@@ -86,3 +86,9 @@ Also be considerate of the DevOps values - flow, feedback and continual learning
 ## 🤔 FAQs
 
 We have collected a list of [Formerly Asked Questions (FAQs)](./FAQS.md)
+
+## INSTALLATION
+Initialise and pull down the code in the submodules:
+```
+git submodule init && git submodule update
+```
