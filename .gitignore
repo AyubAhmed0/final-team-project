@@ -1,0 +1,4 @@
+.terraform
+*.yaml
+*.tfvars
+*.tfstate
