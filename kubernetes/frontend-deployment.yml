@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nc-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nc-frontend
+  template:
+    metadata:
+      labels:
+        app: nc-frontend
+    spec:
+      containers:
+      - name: nc-frontend
+        image: sahrmalik/project-frontend
+        ports:
+        - containerPort: 80
