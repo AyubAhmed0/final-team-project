@@ -27,4 +27,6 @@ module "db" {
   major_engine_version = "5.7"
 
   skip_final_snapshot = true
+
+  publicly_accessible = true
 }

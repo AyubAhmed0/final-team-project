@@ -17,8 +17,11 @@ module "eks_cluster" {
 module "db" {
     source = "./modules/database"
     
-    subnet_ids             = module.networking.private_subnets
+    subnet_ids             = module.networking.public_subnets
 }
+
+
+
 
 
 
