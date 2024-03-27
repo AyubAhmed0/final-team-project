@@ -15,3 +15,9 @@ module "eks_cluster" {
     private_subnets = module.networking.private_subnets
     cluster_name    = var.cluster_name
 }
+
+module "db" {
+    source = "./modules/database"
+    
+    subnet_ids             = module.networking.private_subnets
+}
