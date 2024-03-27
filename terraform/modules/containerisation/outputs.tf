@@ -12,3 +12,15 @@ output "cluster_security_group_id" {
   description = "Security group ids attached to the cluster control plane"
   value       = module.eks.cluster_security_group_id
 }
+
+output "eks_managed_node_groups" {
+  value = module.eks.eks_managed_node_groups
+}
+
+output "fargate_profiles" {
+  value = module.eks.fargate_profiles
+}
+
+output "cluster_certificate_authority_data" {
+  value = module.eks.cluster_certificate_authority_data
+}
