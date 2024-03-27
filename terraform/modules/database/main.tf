@@ -10,7 +10,7 @@ module "db" {
 
   db_name  = "appdb"
   username = "myuser"
-  port     = "3306"
+  port     = "5432"
 
   manage_master_user_password = true
 
