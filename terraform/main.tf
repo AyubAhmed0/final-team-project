@@ -14,3 +14,11 @@ module "eks_cluster" {
 }
 
 
+module "db" {
+    source = "./modules/database"
+    
+    subnet_ids             = module.networking.private_subnets
+}
+
+
+
