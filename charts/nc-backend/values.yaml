@@ -1,0 +1,17 @@
+# Default values for nc-backend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+
+
+service:
+  type: LoadBalancer
+  port: 8080
+
+env:
+  DB_HOST: "*"
+  DB_PORT: "*"
+  DB_NAME: "*"
+  DB_USERNAME: "*"
+  DB_PASSWORD: "*"
