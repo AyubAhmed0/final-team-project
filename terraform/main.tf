@@ -5,6 +5,11 @@ module "networking" {
     cluster_name  = var.cluster_name
 }
 
+module "security_groups" {
+    source = "./modules/security-group"
+    vpc_id = module.networking.vpc_id
+}
+
 # Provision cluster
 module "eks_cluster" {
     source          = "./modules/containerisation"
@@ -15,10 +20,12 @@ module "eks_cluster" {
 
 
 module "db" {
-    source = "./modules/database"
-    
-    subnet_ids             = module.networking.public_subnets
+    source = "./modules/database" 
+    subnet_ids             = module.networking.private_subnets
+    vpc_security_group_ids = [module.security_groups.security-group-id]
 }
+
+
 
 
 

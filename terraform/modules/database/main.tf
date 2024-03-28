@@ -29,4 +29,6 @@ module "db" {
   skip_final_snapshot = true
 
   publicly_accessible = true
+
+  vpc_security_group_ids = var.vpc_security_group_ids
 }
