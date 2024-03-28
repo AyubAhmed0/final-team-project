@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: nc-frontend
 spec:
-  replicas: 1
+  replicas: {{.Values.replicaCount}}
   selector:
     matchLabels:
       app: nc-frontend
@@ -14,6 +14,9 @@ spec:
     spec:
       containers:
       - name: nc-frontend
-        image: sahrmalik/project-frontend
+        image: ayubahmed0/nc-project-frontend
         ports:
         - containerPort: 80
+        env:
+          - name: VITE_API_BASE_URL
+            value: {{ .Values.env.VITE_API_BASE_URL }}
