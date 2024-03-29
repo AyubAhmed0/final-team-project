@@ -1,6 +1,0 @@
-[submodule "ce-team-project-frontend"]
-	path = ce-team-project-frontend
-	url = https://github.com/northcoders/ce-team-project-frontend
-[submodule "ce-team-project-backend"]
-	path = ce-team-project-backend
-	url = https://github.com/AyubAhmed0/ce-team-project-backend.git
