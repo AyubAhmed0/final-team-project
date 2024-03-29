@@ -1,0 +1,73 @@
+version: 2.1
+orbs:
+  node: circleci/node@5.1.0
+jobs:
+  # Java application build and test job
+  backend-java-build-and-test:
+    docker:
+      - image: cimg/openjdk:17.0.7
+    working_directory: ~/nc-project-team4
+
+    steps:
+      - checkout
+      - run:
+          name: Build Java Application
+          command: mvn -B -DskipTests clean package
+          working_directory: ~/nc-project-team4/ce-team-project-backend
+      - run:
+          name: Test Java Application
+          command: mvn test
+          working_directory: ~/nc-project-team4/ce-team-project-backend
+
+  # Docker image build and push for Java backend to Docker Hub
+  backend-java-docker-build-and-push:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build and Push Docker Image for Java Backend
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker build -t ayubahmed0/nc-project-backend:latest .
+            docker push ayubahmed0/nc-project-backend:latest
+          working_directory: ~/nc-project-team4/ce-team-project-backend
+
+  # JavaScript frontend build and test job
+  frontend-js-build-and-test:
+    docker:
+      - image: cimg/node:18.12.1
+    working_directory: ~/nc-project-team4
+    steps:
+      - checkout
+      - run: npm install --prefix ce-team-project-frontend
+      - run: npm test --prefix ce-team-project-frontend
+
+  # Docker image build and push for JS frontend to Docker Hub
+  frontend-js-docker-build-and-push:
+    docker:
+      - image: cimg/base:stable
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: Build and Push Docker Image for JS Frontend
+          command: |
+            echo "$DOCKERHUB_PASS" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+            docker build -t ayubahmed0/nc-project-frontend:latest .
+            docker push ayubahmed0/nc-project-frontend:latest
+          working_directory: ~/nc-project-team4/ce-team-project-frontend
+
+# Define workflows
+workflows:
+  build-and-deploy:
+    jobs:
+      - backend-java-build-and-test
+      - backend-java-docker-build-and-push:
+          requires:
+            - backend-java-build-and-test
+      - frontend-js-build-and-test
+      - frontend-js-docker-build-and-push:
+          requires:
+            - frontend-js-build-and-test
