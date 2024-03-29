@@ -56,9 +56,9 @@ jobs:
     working_directory: ~/ce-team-project
     steps:
       - checkout
-      - run: cd frontend && npm install
+      - run: cd ce-team-project-frontend && npm install
  
-      - run: cd frontend && npm test
+      - run: cd ce-team-project-frontend && npm test
   build-image-and-push-js:
     working_directory: ~/ce-team-project/ce-team-project-frontend
     docker:
