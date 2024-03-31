@@ -1,6 +1,6 @@
 # README.md
 
-Designed by Team Terrafourm! This project has been completed by Ayub Ahmed,Rik Deakin, Alexander Nichols and Sahr Malik
+Designed by Team Terrafourm! This project has been completed by Ayub Ahmed, Rik Deakin, Alexander Nichols and Sahr Malik
 
 ## Overview
 This repository contains the Northcoders final group project. The objective was to deploy a full-stack web application to AWS cloud using the tools and technologies we have learned over the past 13 weeks. We aimed to follow DevOps principles, automate CI/CD pipelines and to create an infrastructure that is secure and scalable. 
