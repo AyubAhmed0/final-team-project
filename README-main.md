@@ -35,11 +35,11 @@ Our Docker images are hosted on Amazon’s container registry.
 
 
 ## EKS
-Insert text here
+An EKS cluster will be deployed using the Terraform code. Our full-stack web application will be deployed and running on our EKS cluster with a front-end node and a back-end node.
 
 
 ## RDS
-Insert text here
+A database instance will also be deployed by our Terraform code. The database is used to store user credentials upon registration, and will be used for authentication upon login. The database will have a connection with our app on the EKS cluster by allowing connection via a security group.
 
 
 ## HELM
