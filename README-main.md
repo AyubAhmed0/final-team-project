@@ -39,15 +39,15 @@ An EKS cluster will be deployed using the Terraform code. Our full-stack web app
 
 
 ## RDS
-A database instance will also be deployed by our Terraform code. The database is used to store user credentials upon registration, and will be used for authentication upon login. The database will have a connection with our app on the EKS cluster by allowing connection via a security group.
+A database instance will also be deployed by our Terraform code. The database is used to store user credentials upon registration, and will be used for authentication upon login. The database will have a connection with our app on the EKS cluster by allowing connections via a security group.
 
 
 ## HELM
-Insert text here
+We refactored the Kubernetes deployment and Service yaml files to be Helm charts. We found this to be more organized approach to customizing the configuration files and to create reusable configurations to use across multiple deployments. 
 
 
 ## CIRCLECI
-Insert text here
+CircleCI is what we will be using for continuous integration. Whenever we make any changes to this repository, CircleCI will run builds and tests, if everything passes, the updated Docker images will be pushed to ECR.
 
 
 ## ARGOCD
