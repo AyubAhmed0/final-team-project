@@ -28,10 +28,29 @@ Our team used an IaC tool - Terraform in order to be able to deploy our infrastr
 ## IAM
 In order for the team to have access to one EKS cluster, we created IAM roles, users and a group which contains the necessary permissions to give access to EKS. This allows each team member to work on the CI/CD pipeline from their own respective machines. 
 
-Whenever the infrastructure has been created, a new oidc link for EKS will need to be copied into line 8 of the main.tf file in the IAM module. This will give access to the newly created EKS cluster for all users.
+Whenever the infrastructure has been created, a new oidc link for EKS will need to be copied into line 8 of the main.tf file in the IAM module. This will give access to the newly created EKS cluster for all users. 
+
+Once the EKS cluster and IAM user have been created, you will need to modify the kube config file: 
+```
+kubectl edit -n kube-system configmap/aws-auth
+```
+
+Then, add in the users you want to give access: 
+```
+mapUsers: |
+    - userarn: arn:aws:iam::{account-id of the parent account}:user/{IAM username of child account}
+      username: {IAM username of child account}
+      groups:
+        - system:masters
+ ```
+
+The user will need to sign in to the CLI using the appropriate access and secret access keys, then change context to the EKS cluster: 
+```
+aws eks update-kubeconfig --name ce-cluster --region eu-west-2
+```
 
 ## ECR
-Our Docker images are hosted on Amazon’s container registry.
+Our Docker images are hosted on Amazon’s container registry. One repository for the frontend image, and one for the backend image. 
 
 
 ## EKS
