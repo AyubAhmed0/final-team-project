@@ -14,13 +14,13 @@ spec:
     spec:
       containers:
         - name: nc-backend
-          image: ayubahmed0/nc-project-backend
+          image: public.ecr.aws/r3f7r2l5/ce-project-backend
           ports:
             - containerPort: 8080
           livenessProbe:
             httpGet:
               path: /actuator/health
-              port: http
+              port: 8080
           env:
             - name: DB_HOST
               value: {{ .Values.env.DB_HOST }}

@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: nc-frontend
-        image: ayubahmed0/nc-project-frontend
+        image: public.ecr.aws/r3f7r2l5/ce-project-frontend
         ports:
         - containerPort: 80
         env:
