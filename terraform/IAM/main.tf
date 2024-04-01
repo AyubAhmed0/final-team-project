@@ -5,7 +5,7 @@ module "eks_iam_roles" {
   create_role              = true
   role_name                = "EKS-Team-Role"
 # Only line 8 will need to be changed upon each apply
-  provider_url             = "oidc.eks.eu-west-2.amazonaws.com/id/32A8A2CB07F615B622CB942DF341A958"
+  provider_url             = "oidc.eks.eu-west-2.amazonaws.com/id/730FAAAE1D1078C1C545D8EEA499053F"
   oidc_fully_qualified_subjects = ["system:serviceaccount:default:team4"] 
   role_policy_arns         = [
     "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
