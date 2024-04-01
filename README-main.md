@@ -19,11 +19,11 @@ This repository contains the Northcoders final group project. The objective was 
 
 ## Infrastructure
 Our team used an IaC tool - Terraform in order to be able to deploy our infrastructure to the AWS cloud. We organized our Terraform code into modules to make it clean and easy to read. Our modules include:
-* IAM: to give access to the EKS cluster
+* IAM: to give access to the EKS cluster (This module has been seperated into a different directory from the other modules. This is to prevent having to create new IAM user credentials upon each Terraform destroy/apply)
 * Networking: which creates the VPC with public and private subnets
-* Security Groups: this allows the EKS cluster to communicate with RDS
+* Security Groups: this allows the EKS cluster to communicate with the RDS instance
 * EKS: Kubernetes cluster with adjustable node groups
-* Database: which provisions the RDS database which stores the login data of the app’s users
+* Database: which provisions the RDS database which stores the login data of the application’s users
 
 ## IAM
 In order for the team to have access to one EKS cluster, we created IAM roles, users and a group which contains the necessary permissions to give access to EKS. This allows each team member to work on the CI/CD pipeline from their own respective machines. 
