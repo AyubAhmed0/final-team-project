@@ -21,9 +21,11 @@ module "eks_cluster" {
 
 module "db" {
     source = "./modules/database" 
-    subnet_ids             = module.networking.private_subnets
+    subnet_ids             = module.networking.public_subnets #public subnet for testing purposes 
     vpc_security_group_ids = [module.security_groups.security-group-id]
 }
+
+
 
 
 

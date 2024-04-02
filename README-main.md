@@ -72,7 +72,7 @@ The working directories in the circleci config.yaml files will need to be change
 
 
 ## ARGOCD
-Insert text here
+We too a GitOps approach to application deployment using ArgoCD. Our Kubernetes Helm charts are stored in our Git repository, and ArgoCD ensures that the clusters are in sync with our repo. 
 
 
 ## Prometheus / Grafana
