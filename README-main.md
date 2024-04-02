@@ -54,7 +54,7 @@ Our Docker images are hosted on Amazon’s container registry. One repository fo
 
 
 ## EKS
-An EKS cluster will be deployed using the Terraform code. Our full-stack web application will be deployed and running on our EKS cluster with a front-end node and a back-end node.
+An EKS cluster will be deployed using the Terraform code. Our full-stack web application will be deployed and running on our EKS cluster with a front-end pod and a back-end pod. Our service type is a LoadBalancer, so if you want to increase the number of replicas, the load balancer will spread the traffic evenly. 
 
 
 ## RDS
@@ -73,6 +73,46 @@ The working directories in the circleci config.yaml files will need to be change
 
 ## ARGOCD
 We too a GitOps approach to application deployment using ArgoCD. Our Kubernetes Helm charts are stored in our Git repository, and ArgoCD ensures that the clusters are in sync with our repo. 
+First, you need to ensure that you are in the correct Kubernetes context:
+```
+aws eks update-kubeconfig --name ce-cluster --region eu-west-2
+```
+Next, create a seperate namespace for ArgoCD:
+```
+kubectl create namespace argocd
+```
+Then apply the YAML files associated with ArgoCD:
+```
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+You can check if your ArgoCD pods are deployed by running:
+```
+kubectl get pods -n argocd
+```
+You should see something similar to:
+```
+NAME                                                READY   STATUS    RESTARTS   AGE
+argocd-application-controller-0                     1/1     Running   0          78s
+argocd-applicationset-controller-55c8466cdf-srbt7   1/1     Running   0          78s
+argocd-dex-server-6cd4c7498f-9v8z4                  1/1     Running   0          78s
+argocd-notifications-controller-65cddcf9d6-kq574    1/1     Running   0          78s
+argocd-redis-74d77964b-x8bh6                        1/1     Running   0          78s
+argocd-repo-server-96b577c5-8b6b8                   1/1     Running   0          78s
+argocd-server-7c7b5568cc-b85v8                      1/1     Running   0          78s
+```
+
+You will need to obtain the password to log in to the ArgoCD user interface:
+```
+kubectl -n argocd get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d
+```
+Now you will use Kubernetes port forwarding to access the user interface:
+```
+kubectl port-forward svc/argocd-server -n argocd 8080:443
+```
+
+Now open up your browser and navigate to http://localhost:8080
+Enter the username: admin
+Enter the password received in the previous step and log in
 
 
 ## Prometheus / Grafana
