@@ -116,4 +116,4 @@ Enter the password received in the previous step and log in
 
 
 ## Prometheus / Grafana
-Insert text here
+We used Prometheus & Grafana in order to create and monitor certain metrics. For example, we monitored CPU usage and number of users logged in over time. Grafana is used to visually display these metrics in an easy to read manner. 

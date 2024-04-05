@@ -1,0 +1,17 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: backend-service-monitor
+  namespace: default
+spec:
+  endpoints:
+    - interval: 15s
+      path: /actuator/prometheus
+      port: metrics-port
+      scrapeTimeout: 14s
+  namespaceSelector:
+    matchNames:
+      - default
+  selector:
+    matchLabels:
+      app.kubernetes.io/part-of: nc-backend
